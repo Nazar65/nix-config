@@ -32,6 +32,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [80 443];
+  services.nginx.enable = true;
   services.frigate = {
     enable = true;
     hostname = "nvr.klovanych.org";
