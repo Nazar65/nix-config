@@ -31,6 +31,8 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
+  networking.firewall.allowedTCPPorts = [ "80" "443" ];
+
   services.frigate = {
     enable = true;
     hostname = "nvr.klovanych.org";
@@ -96,7 +98,6 @@
   nixpkgs.config.allowUnfree = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
   # This value determines the NixOS release from which the default
