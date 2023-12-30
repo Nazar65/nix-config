@@ -43,9 +43,7 @@
             hwaccel_args = "preset-vaapi";
             inputs = [{
               path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
-              roles = ["record" ];
-              path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream2";
-              roles = ["detect"];
+              roles = ["record" "detect"];
             }];
           };
           detect = {
@@ -100,6 +98,9 @@
       git
     ];
   };
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
