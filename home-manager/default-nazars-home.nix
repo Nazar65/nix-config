@@ -100,6 +100,10 @@
     enable = true;
     userName = "klovanych";
     userEmail = "nazarn96@gmail.com";
+    extraConfig = {
+      color.ui = true;
+      credential.helper = "store --file ~/.git-credentials";
+    };
     signing = {
       key = "B510AA5B74EAF294";
       signByDefault = true;
