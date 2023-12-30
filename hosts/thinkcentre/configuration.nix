@@ -51,11 +51,6 @@
           };
           record = {
             enabled = true;
-            retain.days = 0;
-            events.retain = {
-              default = 3; # To retain recording for 3 days of only the events that happened
-              mode = "active_objects";
-            };
           };
         };
       };
