@@ -87,7 +87,9 @@
     description = "nazar";
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"];
-    packages = with pkgs; [];
+    packages = with pkgs; [
+      git
+    ];
   };
 
   # Allow unfree packages
