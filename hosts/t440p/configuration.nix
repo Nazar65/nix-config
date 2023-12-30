@@ -1,0 +1,153 @@
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  # You can import other NixOS modules here
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  # Bootloader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
+  boot.initrd.luks.devices."luks-408c128c-e03d-4c8e-a927-ecdd107ab2e5".device = "/dev/disk/by-uuid/408c128c-e03d-4c8e-a927-ecdd107ab2e5";
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  boot.loader.grub.enableCryptodisk=true;
+  boot.initrd.luks.devices."luks-de73cffa-f905-4d61-954b-e483d5d41286".keyFile = "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-408c128c-e03d-4c8e-a927-ecdd107ab2e5".keyFile = "/crypto_keyfile.bin";
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # If you want to use overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    
+    # Configure your nixpkgs instance
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  services.xserver.excludePackages = [ pkgs.xterm ];
+  environment.shells = with pkgs; [ zsh ];
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gnome-text-editor
+    gnome-usage
+    gnome-connections
+    gnome-secrets
+    simple-scan
+    yelp
+  ]) ++ (with pkgs.gnome; [
+    rygel
+    gnome-calculator
+    gnome-logs
+    gnome-disk-utility
+    gnome-weather
+    gnome-contacts
+    gnome-clocks
+    gnome-maps
+    gnome-contacts
+    nautilus
+    cheese # webcam tool
+    gnome-music
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+    baobab # disk usage analyzer
+    file-roller
+    gnome-calendar
+    simple-scan
+    gnome-font-viewer
+    yelp
+    eog
+    gnome-color-manager
+  ]);
+
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  networking.hostName = "goat";
+  networking.networkmanager.enable = true;
+  # Set your time zone.
+  time.timeZone = "Europe/Kyiv";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    xkbVariant = "";
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+
+  # This will add each flake input as a registry
+  # To make nix3 commands consistent with your flake
+  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+
+  # This will additionally add your inputs to the system's legacy channels
+  # Making legacy nix commands consistent as well, awesome!
+  nix.nixPath = ["/etc/nix/path"];
+  environment.etc =
+    lib.mapAttrs'
+      (name: value: {
+        name = "nix/path/${name}";
+        value.source = value.flake;
+      })
+      config.nix.registry;
+
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    auto-optimise-store = true;
+  };
+
+  programs.zsh.enable = true;
+  
+  users.users = {
+    nazar = {
+      shell = pkgs.zsh;
+      isNormalUser = true;     
+      extraGroups = ["networkmanager" "wheel"];
+      packages = with pkgs; [
+        home-manager
+      ];
+    };
+  };
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.11";
+}
