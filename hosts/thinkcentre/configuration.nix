@@ -45,12 +45,21 @@
               roles = [ "detect" "record" ];
             }];
           };
+          detect = {
+            width = "2560";
+            height = "1440";
+          };
           snapshots = {
             enabled = true;
             bounding_box = true;
           };
           record = {
             enabled = true;
+            retain.days = 7;
+            events.retain = {
+              default = 10; # To retain recording for 3 days of only the events that happened
+              mode = "active_objects";
+            };
           };
         };
       };
