@@ -356,6 +356,7 @@ in
         UMask = "0077";
 
         # Caches
+        PrivateTmp = true;
         CacheDirectory = "frigate";
 
         BindPaths = [
