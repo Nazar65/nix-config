@@ -40,14 +40,17 @@
       cameras = {
         tplink-cam = {
           ffmpeg = {
+            hwaccel_args = "preset-vaapi";
             inputs = [{
               path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
-              roles = [ "detect" "record" ];
+              roles = ["record" ];
+              path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream2";
+              roles = ["detect"];
             }];
           };
           detect = {
-            width = "2560";
-            height = "1440";
+            width = "1280";
+            height = "720";
           };
           snapshots = {
             enabled = true;
