@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: {
-  disabledModules = [ "services/monitoring/grafana.nix" ];
+  disabledModules = [ "services/video/frigate.nix" ];
 
   imports = [
     ./hardware-configuration.nix
@@ -25,18 +25,6 @@
 
     nixpkgs = {
     overlays = [   
-       (final: prev: {
-         myfrigate = final.frigate.overrideAttrs (oldAttrs: {
-           postPatch = ''                
-                substituteInPlace frigate/const.py \
-                   --replace "/tmp/cache" "/tmp/frigate/cache"
-                substituteInPlace frigate/record.py \
-                   --replace "/tmp/cache" "/tmp/frigate/cache"
-                substituteInPlace frigate/http.py \
-                   --replace "/tmp/cache/" "/tmp/frigate/cache"
-          '' + (oldAttrs.postPatch or "");
-         });
-       })
     ];
     
     # Configure your nixpkgs instance
@@ -67,7 +55,6 @@
   networking.firewall.allowedTCPPorts = [80 443];
   services.nginx.enable = true;
   services.frigate = {
-    package = pkgs.myfrigate;
     enable = true;
     hostname = "nvr.klovanych.org";
     settings = {

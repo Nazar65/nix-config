@@ -356,8 +356,6 @@ in
         UMask = "0077";
 
         # Caches
-        PrivateTmp = true;
-        ReadWritePaths = "/var/cache/frigate";
         CacheDirectory = "frigate";
 
         BindPaths = [
