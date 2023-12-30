@@ -31,8 +31,7 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
-  networking.firewall.allowedTCPPorts = [80 443];
-
+  networking.firewall.allowedTCPPorts = [80];
   services.frigate = {
     enable = true;
     hostname = "nvr.klovanych.org";
