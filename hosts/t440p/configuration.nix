@@ -89,6 +89,15 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  # better performance than the actual Intel driver
+  services.xserver.videoDrivers = ["modesetting"];
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = [
+    pkgs.intel-media-driver
+    pkgs.vaapiIntel
+    pkgs.vaapiVdpau
+    pkgs.libvdpau-va-gl
+  ];
   security.rtkit.enable = true;
   networking.hostName = "goat";
   networking.networkmanager.enable = true;

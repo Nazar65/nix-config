@@ -1,12 +1,16 @@
 {
   inputs,
+  python3,
   lib,
   config,
   pkgs,
   ...
 }: {
+  disabledModules = [ "services/monitoring/grafana.nix" ];
+
   imports = [
     ./hardware-configuration.nix
+    ./services/frigate.nix
   ];
 
   # Bootloader.
@@ -19,6 +23,28 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+    nixpkgs = {
+    overlays = [   
+       (final: prev: {
+         myfrigate = final.frigate.overrideAttrs (oldAttrs: {
+           postPatch = ''                
+                substituteInPlace frigate/const.py \
+                   --replace "/tmp/cache" "/tmp/frigate/cache"
+                substituteInPlace frigate/record.py \
+                   --replace "/tmp/cache" "/tmp/frigate/cache"
+                substituteInPlace frigate/http.py \
+                   --replace "/tmp/cache/" "/tmp/frigate/cache"
+          '' + (oldAttrs.postPatch or "");
+         });
+       })
+    ];
+    
+    # Configure your nixpkgs instance
+    config = {
+      allowUnfree = true;
+    };
+  };
+  
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
 
@@ -30,25 +56,41 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
-
+  boot.initrd.kernelModules = ["i915"];
+  hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = [
+    pkgs.intel-media-driver
+    pkgs.vaapiIntel
+    pkgs.vaapiVdpau
+    pkgs.libvdpau-va-gl
+  ];
   networking.firewall.allowedTCPPorts = [80 443];
   services.nginx.enable = true;
   services.frigate = {
+    package = pkgs.myfrigate;
     enable = true;
     hostname = "nvr.klovanych.org";
     settings = {
       cameras = {
-        tplink-cam = {
+        backyard-view-cam = {
           ffmpeg = {
             hwaccel_args = "preset-vaapi";
-            inputs = [{
-              path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
-              roles = ["record" "detect"];
-            }];
+            inputs = [
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream2";
+                roles = ["detect"];
+              }
+            ];
           };
           detect = {
-            width = "1280";
-            height = "720";
+            enabled = true;
+            width = 1920;
+            height = 1080;
+            fps = 8;
           };
           snapshots = {
             enabled = true;
@@ -56,11 +98,6 @@
           };
           record = {
             enabled = true;
-            retain.days = 7;
-            events.retain = {
-              default = 10; # To retain recording for 3 days of only the events that happened
-              mode = "active_objects";
-            };
           };
         };
       };
@@ -93,7 +130,9 @@
     isNormalUser = true;
     description = "nazar";
     extraGroups = [ "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"
+    ];
     packages = with pkgs; [
       git
     ];
@@ -102,9 +141,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"
   ];
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
+  
   # Open ports in the firewall.
   # networking.firewall.allowedUDPPorts = [ ... ];
 
