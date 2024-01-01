@@ -346,11 +346,12 @@ in
         # not available on aarch64-linux
         intel-gpu-tools
       ];
+      
       serviceConfig = {
         ExecStart = "${cfg.package.python.interpreter} -m frigate";
 
-        DynamicUser = true;
-        User = "frigate";
+        User = "nginx";
+        Group = "nginx";
 
         StateDirectory = "frigate";
         UMask = "0077";
@@ -364,5 +365,7 @@ in
         ];
       };
     };
+
+
   };
 }

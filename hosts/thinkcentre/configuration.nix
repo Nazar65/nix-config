@@ -25,18 +25,6 @@
 
     nixpkgs = {
     overlays = [   
-       (final: prev: {
-         myfrigate = final.frigate.overrideAttrs (oldAttrs: {
-           postPatch = ''                
-                substituteInPlace frigate/const.py \
-                   --replace "/tmp/cache" "/tmp/frigate/cache"
-                substituteInPlace frigate/record.py \
-                   --replace "/tmp/cache" "/tmp/frigate/cache"
-                substituteInPlace frigate/http.py \
-                   --replace "/tmp/cache/" "/tmp/frigate/cache"
-          '' + (oldAttrs.postPatch or "");
-         });
-       })
     ];
     
     # Configure your nixpkgs instance
@@ -67,13 +55,13 @@
   networking.firewall.allowedTCPPorts = [80 443];
   services.nginx.enable = true;
   services.frigate = {
-    package = pkgs.myfrigate;
     enable = true;
     hostname = "nvr.klovanych.org";
     settings = {
       cameras = {
         backyard-view-cam = {
           ffmpeg = {
+            output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
             hwaccel_args = "preset-vaapi";
             inputs = [
               {

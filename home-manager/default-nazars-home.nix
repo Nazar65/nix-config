@@ -73,7 +73,7 @@
     profiles.personal = {
       isDefault= true;
       settings = {
-        "calendar.timezone.local" = "Europe/Kiyv";
+        "calendar.timezone.local" = "Europe/Kiev";
         "calendar.timezone.useSystemTimezone" = true;
         "datareporting.healthreport.uploadEnabled" = false;
         "mail.incorporate.return_receipt" = 1;
