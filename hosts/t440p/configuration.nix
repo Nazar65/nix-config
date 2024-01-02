@@ -99,8 +99,12 @@
     pkgs.libvdpau-va-gl
   ];
   security.rtkit.enable = true;
-  networking.hostName = "goat";
+  networking.hostName = "t440p";
   networking.networkmanager.enable = true;
+  networking.extraHosts =
+    ''
+    127.0.0.1 burpee.local
+  '';
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
 
@@ -158,5 +162,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "23.05";
 }

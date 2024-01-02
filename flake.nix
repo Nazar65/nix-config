@@ -41,11 +41,6 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home-manager/default-nazars-home.nix];
       };
-      "burpee@t440p" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/web-development-burpee.local.nix];
-      };
     };
   };
 }
