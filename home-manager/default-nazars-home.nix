@@ -42,6 +42,7 @@
       telegram-desktop
       gnome.gnome-tweaks
       rnix-lsp
+      nodejs
     ];
   };
 
@@ -56,7 +57,7 @@
     enable = true;
     startWithUserSession = "graphical";
   };
-  
+
   programs.emacs.enable = true;
 
   accounts.email.accounts = {
@@ -67,7 +68,7 @@
       userName = "klovanych";
     };
   };
-  
+
   programs.thunderbird = {
     enable = true;
     profiles.personal = {
@@ -82,20 +83,20 @@
         "mail.spam.manualMark" = true;
         "offline.download.download_messages" = 1;
       };
-    };    
+    };
   };
-  
+
   programs.password-store = {
-    enable = true;   
+    enable = true;
     settings = {
       PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
     };
   };
-  
+
   programs.firefox = {
     enable = true;
   };
-  
+
   programs.git = {
     enable = true;
     userName = "klovanych";
