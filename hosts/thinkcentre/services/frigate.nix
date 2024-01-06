@@ -359,6 +359,7 @@ in
         # Caches
         PrivateTmp = true;
         CacheDirectory = "frigate";
+        CacheDirectoryMode = "0750";
 
         BindPaths = [
           "/migrations:${cfg.package}/share/frigate/migrations:ro"

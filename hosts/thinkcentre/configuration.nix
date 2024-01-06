@@ -1,6 +1,5 @@
 {
   inputs,
-  python3,
   lib,
   config,
   pkgs,
@@ -23,16 +22,25 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-    nixpkgs = {
+  nixpkgs = {
     overlays = [   
+      (final: prev: {
+        frigate = prev.frigate.overrideAttrs (oldAttrs: {
+          postPatch = ''
+               substituteInPlace frigate/http.py \
+                   --replace "/tmp/cache/" "/var/cache/frigate/"
+          '' + (oldAttrs.postPatch or "");
+        });
+      })
     ];
+
     
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
     };
   };
-  
+ 
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
 
@@ -52,12 +60,57 @@
     pkgs.vaapiVdpau
     pkgs.libvdpau-va-gl
   ];
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [80 443 8123 1883];
   services.nginx.enable = true;
+  
+  services.esphome = {
+    enable = true;
+    address = "0.0.0.0";
+  };
+
+  systemd.tmpfiles.rules = [
+    "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
+  ];
+  
+  services.home-assistant = {
+    enable = true;
+    extraComponents = [
+      "esphome"
+      "met"
+      "ffmpeg"
+      "radio_browser"
+      "mqtt"
+      "wled"
+    ];
+    customComponents = [
+      (pkgs.python311Packages.callPackage ./packages/home-assistant/custom_components/frigate-hass-integration.nix {})
+    ];
+    config = {
+      default_config = {};
+      "automation ui" = "!include /var/lib/hass/automations.yaml";
+    };
+  };
+  
+  services.mosquitto = {
+    enable = true;
+    listeners = [
+      {
+        acl = [ "pattern readwrite #" ];
+        omitPasswordAuth = true;
+        settings.allow_anonymous = true;
+      }
+    ];
+  };
+
   services.frigate = {
     enable = true;
     hostname = "nvr.klovanych.org";
     settings = {
+      mqtt = {
+        enabled = true;
+        host = "localhost";
+        port = "1883";
+      };
       cameras = {
         backyard-view-cam = {
           ffmpeg = {
@@ -78,7 +131,7 @@
             enabled = true;
             width = 1920;
             height = 1080;
-            fps = 8;
+            fps = 5;
           };
           snapshots = {
             enabled = true;
