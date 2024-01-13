@@ -147,11 +147,11 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.64:554/stream1";
+                path = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
                 roles = ["record"];
               }
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.64:554/stream2";
+                path = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream2";
                 roles = ["detect"];
               }
             ];
@@ -161,11 +161,11 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.65:554/stream1";
+                path = "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1";
                 roles = ["record"];
               }
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.65:554/stream2";
+                path = "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream2";
                 roles = ["detect"];
               }
             ];
@@ -175,11 +175,11 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.66:554/stream1";
+                path = "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1";
                 roles = ["record"];
               }
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.66:554/stream2";
+                path = "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream2";
                 roles = ["detect"];
               }
             ];
@@ -216,14 +216,14 @@
     description = "nazar";
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWyZ1RlTRADJAFBoOpOOAcHtvILhDHtrrBLWaNeSg8v nazarn96@gmail.com"
     ];
     packages = with pkgs; [
       git
     ];
   };
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAhZ6wg+6tHLPXOiMnvDsf7jd/N6RbzEaJaJa0ElL3F n.klovanych@atwix.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWyZ1RlTRADJAFBoOpOOAcHtvILhDHtrrBLWaNeSg8v nazarn96@gmail.com"
   ];
 
   
