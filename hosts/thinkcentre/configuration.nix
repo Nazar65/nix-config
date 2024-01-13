@@ -112,10 +112,25 @@
         port = "1883";
       };
       cameras = {
+        ffmpeg = {
+          output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
+          hwaccel_args = "preset-vaapi";
+        };
+        detect = {
+          enabled = true;
+          width = 1920;
+          height = 1080;
+          fps = 5;
+        };
+        snapshots = {
+          enabled = true;
+          bounding_box = true;
+        };
+        record = {
+          enabled = true;
+        };
         backyard-view-cam = {
           ffmpeg = {
-            output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
-            hwaccel_args = "preset-vaapi";
             inputs = [
               {
                 path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
@@ -126,19 +141,48 @@
                 roles = ["detect"];
               }
             ];
+          };         
+        };
+        driveway-camera = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.64:554/stream1";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.64:554/stream2";
+                roles = ["detect"];
+              }
+            ];
           };
-          detect = {
-            enabled = true;
-            width = 1920;
-            height = 1080;
-            fps = 5;
+        };
+        frontgate-camera = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.65:554/stream1";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.65:554/stream2";
+                roles = ["detect"];
+              }
+            ];
           };
-          snapshots = {
-            enabled = true;
-            bounding_box = true;
-          };
-          record = {
-            enabled = true;
+        };
+        neighborhood-camera = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.66:554/stream1";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.66:554/stream2";
+                roles = ["detect"];
+              }
+            ];
           };
         };
       };
