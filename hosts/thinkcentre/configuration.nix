@@ -112,10 +112,8 @@
         port = "1883";
       };
       cameras = {
-        ffmpeg = {
-          output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
-          hwaccel_args = "preset-vaapi";
-        };
+        output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
+        hwaccel_args = "preset-vaapi";
         detect = {
           enabled = true;
           width = 1920;
