@@ -112,8 +112,6 @@
         port = "1883";
       };
       cameras = {
-        output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
-        hwaccel_args = "preset-vaapi";
         detect = {
           enabled = true;
           width = 1920;
@@ -129,6 +127,8 @@
         };
         backyard-view-cam = {
           ffmpeg = {
+            output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
+            hwaccel_args = "preset-vaapi";
             inputs = [
               {
                 path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
@@ -143,6 +143,8 @@
         };
         driveway-camera = {
           ffmpeg = {
+            output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
+            hwaccel_args = "preset-vaapi";
             inputs = [
               {
                 path = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
@@ -157,6 +159,8 @@
         };
         frontgate-camera = {
           ffmpeg = {
+            output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
+            hwaccel_args = "preset-vaapi";
             inputs = [
               {
                 path = "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1";
@@ -171,6 +175,8 @@
         };
         neighborhood-camera = {
           ffmpeg = {
+            output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
+            hwaccel_args = "preset-vaapi";
             inputs = [
               {
                 path = "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1";
