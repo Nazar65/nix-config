@@ -40,7 +40,7 @@
       allowUnfree = true;
     };
   };
- 
+  
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
 
@@ -122,9 +122,6 @@
           enabled = true;
           bounding_box = true;
         };
-        record = {
-          enabled = true;
-        };
         backyard-view-cam = {
           ffmpeg = {
             output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
@@ -139,7 +136,10 @@
                 roles = ["detect"];
               }
             ];
-          };         
+          };
+          record = {
+            enabled = true;
+          };
         };
         driveway-camera = {
           ffmpeg = {
@@ -155,6 +155,9 @@
                 roles = ["detect"];
               }
             ];
+          };
+          record = {
+            enabled = true;
           };
         };
         frontgate-camera = {
@@ -172,6 +175,9 @@
               }
             ];
           };
+          record = {
+            enabled = true;
+          };
         };
         neighborhood-camera = {
           ffmpeg = {
@@ -187,6 +193,9 @@
                 roles = ["detect"];
               }
             ];
+          };
+          record = {
+            enabled = true;
           };
         };
       };
