@@ -111,17 +111,7 @@
         host = "localhost";
         port = "1883";
       };
-      cameras = {
-        detect = {
-          enabled = true;
-          width = 1920;
-          height = 1080;
-          fps = 5;
-        };
-        snapshots = {
-          enabled = true;
-          bounding_box = true;
-        };
+      cameras = {        
         backyard-view-cam = {
           ffmpeg = {
             output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
@@ -139,6 +129,16 @@
           };
           record = {
             enabled = true;
+          };
+          detect = {
+            enabled = true;
+            width = 640;
+            height = 480;
+            fps = 20;
+          };
+          snapshots = {
+            enabled = true;
+            bounding_box = true;
           };
         };
         driveway-camera = {
@@ -159,6 +159,16 @@
           record = {
             enabled = true;
           };
+          detect = {
+            enabled = true;
+            width = 640;
+            height = 480;
+            fps = 20;
+          };
+          snapshots = {
+            enabled = true;
+            bounding_box = true;
+          };
         };
         frontgate-camera = {
           ffmpeg = {
@@ -178,6 +188,16 @@
           record = {
             enabled = true;
           };
+          detect = {
+            enabled = true;
+            width = 640;
+            height = 480;
+            fps = 20;
+          };
+          snapshots = {
+            enabled = true;
+            bounding_box = true;
+          };
         };
         neighborhood-camera = {
           ffmpeg = {
@@ -196,6 +216,16 @@
           };
           record = {
             enabled = true;
+          };
+          detect = {
+            enabled = true;
+            width = 640;
+            height = 480;
+            fps = 20;
+          };
+          snapshots = {
+            enabled = true;
+            bounding_box = true;
           };
         };
       };
