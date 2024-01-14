@@ -112,6 +112,13 @@
         width = "1920";
         height = "1080";
       };
+      objects.track =
+        [
+          "person"
+          "car"
+          "cat"
+          "dog"
+        ];
       mqtt = {
         enabled = true;
         host = "localhost";
@@ -133,16 +140,7 @@
               }
             ];
           };
-          objects.track =
-            [
-              "person"
-              "car"
-              "cat"
-              "dog"
-            ];
-          record = {
-            enabled = true;
-          };
+          record.enabled = true;
           detect = {
             enabled = true;
             width = 640;
@@ -169,16 +167,7 @@
               }
             ];
           };
-          objects.track = 
-            [
-              "person"
-              "car"
-              "cat"
-              "dog"
-            ];
-          record = {
-            enabled = true;
-          };
+          record.enabled = true;
           detect = {
             enabled = true;
             width = 640;
@@ -205,16 +194,7 @@
               }
             ];
           };
-          objects.track =
-            [
-              "person"
-              "car"
-              "cat"
-              "dog"
-            ];
-          record = {
-            enabled = true;
-          };
+          record.enabled = true;
           detect = {
             enabled = true;
             width = 640;
@@ -241,16 +221,7 @@
               }
             ];
           };
-          objects.track =
-            [
-              "person"
-              "car"
-              "cat"
-              "dog"
-            ];
-          record = {
-            enabled = true;
-          };
+          record.enabled = true;
           detect = {
             enabled = true;
             width = 640;
