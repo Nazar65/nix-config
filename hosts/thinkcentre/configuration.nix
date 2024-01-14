@@ -106,7 +106,7 @@
     enable = true;
     settings.streams = {
       driveway-camera = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
-    }
+    };
   };
   
   services.frigate = {
