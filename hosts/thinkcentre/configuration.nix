@@ -111,6 +111,9 @@
         host = "localhost";
         port = "1883";
       };
+      birdseye = {
+        mode = "continous";
+      };
       cameras = {        
         backyard-view-cam = {
           ffmpeg = {
