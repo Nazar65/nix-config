@@ -107,19 +107,19 @@
     settings.streams = {
       driveway-camera = [
         "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1"
-        "ffmpeg:back#video=h264#audio=aac"
+        "ffmpeg:driveway-camera#audio=aac"
       ];
       backyard-view-cam = [
         "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
-        "ffmpeg:back#video=h264#audio=aac"
+        "ffmpeg:backyard-view-cam#audio=aac"
       ];
       neighborhood-camera = [
         "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
-        "ffmpeg:back#video=h264#audio=aac"
+        "ffmpeg:neighborhood-camera#audio=aac"
       ];
       frontgate-camera = [
         "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1"
-        "ffmpeg:back#video=h264#audio=aac"
+        "ffmpeg:frontgate-camera#audio=aac"
       ];
     };
   };
@@ -164,21 +164,20 @@
         streams = {
           driveway-camera = [
             "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1"
-            "ffmpeg:back#video=h264#audio=aac"
+            "ffmpeg:driveway-camera#audio=aac"
           ];
           backyard-view-cam = [
             "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
-            "ffmpeg:back#video=h264#audio=aac"
+            "ffmpeg:backyard-view-cam#audio=aac"
           ];
           neighborhood-camera = [
             "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
-            "ffmpeg:back#video=h264#audio=aac"
+            "ffmpeg:neighborhood-camera#audio=aac"
           ];
           frontgate-camera = [
             "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1"
-            "ffmpeg:back#video=h264#audio=aac"
+            "ffmpeg:frontgate-camera#audio=aac"
           ];
-
         };
       };
       cameras = {
