@@ -127,14 +127,13 @@
               }
             ];
           };
-          objects.track = {
+          objects.track =
             [
               "person"
               "car"
               "cat"
               "dog"
-            ]
-          };
+            ];
           record = {
             enabled = true;
           };
@@ -164,14 +163,13 @@
               }
             ];
           };
-          objects.track = {
+          objects.track = 
             [
               "person"
               "car"
               "cat"
               "dog"
-            ]
-          };
+            ];
           record = {
             enabled = true;
           };
@@ -201,14 +199,13 @@
               }
             ];
           };
-          objects.track = {
+          objects.track =
             [
               "person"
               "car"
               "cat"
               "dog"
-            ]
-          };
+            ];
           record = {
             enabled = true;
           };
@@ -238,14 +235,13 @@
               }
             ];
           };
-          objects.track = {
+          objects.track =
             [
               "person"
               "car"
               "cat"
               "dog"
-            ]
-          };
+            ];
           record = {
             enabled = true;
           };
