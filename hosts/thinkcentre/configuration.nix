@@ -106,6 +106,12 @@
     enable = true;
     hostname = "nvr.klovanych.org";
     settings = {
+      birdseye = {
+        enabled = true;
+        mode = "continuous";
+        width = "1920";
+        height = "1080";
+      };
       mqtt = {
         enabled = true;
         host = "localhost";
@@ -126,10 +132,6 @@
                 roles = ["detect"];
               }
             ];
-          };
-          birdseye = {
-            enabled = true;
-            mode = "continuous";
           };
           objects.track =
             [
@@ -167,10 +169,6 @@
               }
             ];
           };
-          birdseye = {
-            enabled = true;
-            mode = "continuous";
-          };
           objects.track = 
             [
               "person"
@@ -207,10 +205,6 @@
               }
             ];
           };
-          birdseye = {
-            enabled = true;
-            mode = "continuous";
-          };
           objects.track =
             [
               "person"
@@ -246,10 +240,6 @@
                 roles = ["detect"];
               }
             ];
-          };
-          birdseye = {
-            enabled = true;
-            mode = "continuous";
           };
           objects.track =
             [
