@@ -112,9 +112,6 @@
         port = "1883";
       };
       cameras = {
-        birdseye = {
-          mode = "continous";
-        };
         backyard-view-cam = {
           ffmpeg = {
             output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
@@ -129,6 +126,10 @@
                 roles = ["detect"];
               }
             ];
+          };
+          birdseye = {
+            enabled = true;
+            mode = continous;
           };
           objects.track =
             [
@@ -166,6 +167,10 @@
               }
             ];
           };
+          birdseye = {
+            enabled = true;
+            mode = continous;
+          };
           objects.track = 
             [
               "person"
@@ -202,6 +207,10 @@
               }
             ];
           };
+          birdseye = {
+            enabled = true;
+            mode = continous;
+          };
           objects.track =
             [
               "person"
@@ -237,6 +246,10 @@
                 roles = ["detect"];
               }
             ];
+          };
+          birdseye = {
+            enabled = true;
+            mode = continous;
           };
           objects.track =
             [
