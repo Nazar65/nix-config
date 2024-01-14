@@ -127,6 +127,14 @@
               }
             ];
           };
+          objects.track = {
+            [
+              "person"
+              "car"
+              "cat"
+              "dog"
+            ]
+          };
           record = {
             enabled = true;
           };
@@ -134,7 +142,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 20;
+            fps = 5;
           };
           snapshots = {
             enabled = true;
@@ -156,6 +164,14 @@
               }
             ];
           };
+          objects.track = {
+            [
+              "person"
+              "car"
+              "cat"
+              "dog"
+            ]
+          };
           record = {
             enabled = true;
           };
@@ -163,7 +179,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 20;
+            fps = 5;
           };
           snapshots = {
             enabled = true;
@@ -185,6 +201,14 @@
               }
             ];
           };
+          objects.track = {
+            [
+              "person"
+              "car"
+              "cat"
+              "dog"
+            ]
+          };
           record = {
             enabled = true;
           };
@@ -192,7 +216,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 20;
+            fps = 5;
           };
           snapshots = {
             enabled = true;
@@ -214,6 +238,14 @@
               }
             ];
           };
+          objects.track = {
+            [
+              "person"
+              "car"
+              "cat"
+              "dog"
+            ]
+          };
           record = {
             enabled = true;
           };
@@ -221,7 +253,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 20;
+            fps = 5;
           };
           snapshots = {
             enabled = true;
