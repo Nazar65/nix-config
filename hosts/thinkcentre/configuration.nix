@@ -119,6 +119,16 @@
           "cat"
           "dog"
         ];
+      detect = {
+        enabled = true;
+        width = 640;
+        height = 480;
+        fps = 20;
+      };
+      snapshots = {
+        enabled = true;
+        bounding_box = true;
+      };
       mqtt = {
         enabled = true;
         host = "localhost";
@@ -141,16 +151,6 @@
             ];
           };
           record.enabled = true;
-          detect = {
-            enabled = true;
-            width = 640;
-            height = 480;
-            fps = 20;
-          };
-          snapshots = {
-            enabled = true;
-            bounding_box = true;
-          };
         };
         driveway-camera = {
           ffmpeg = {
@@ -168,16 +168,6 @@
             ];
           };
           record.enabled = true;
-          detect = {
-            enabled = true;
-            width = 640;
-            height = 480;
-            fps = 20;
-          };
-          snapshots = {
-            enabled = true;
-            bounding_box = true;
-          };
         };
         frontgate-camera = {
           ffmpeg = {
@@ -195,16 +185,6 @@
             ];
           };
           record.enabled = true;
-          detect = {
-            enabled = true;
-            width = 640;
-            height = 480;
-            fps = 20;
-          };
-          snapshots = {
-            enabled = true;
-            bounding_box = true;
-          };
         };
         neighborhood-camera = {
           ffmpeg = {
@@ -222,16 +202,6 @@
             ];
           };
           record.enabled = true;
-          detect = {
-            enabled = true;
-            width = 640;
-            height = 480;
-            fps = 20;
-          };
-          snapshots = {
-            enabled = true;
-            bounding_box = true;
-          };
         };
       };
     };
