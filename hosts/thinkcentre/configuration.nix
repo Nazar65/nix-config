@@ -102,6 +102,13 @@
     ];
   };
 
+  services.go2rtc = {
+    enable = true;
+    settings.streams = {
+      driveway-camera = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
+    }
+  };
+  
   services.frigate = {
     enable = true;
     hostname = "nvr.klovanych.org";
@@ -137,6 +144,11 @@
       ffmpeg = {
         output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
         hwaccel_args = "preset-vaapi";
+      };
+      go2rtc = {
+        streams = {
+          driveway-camera = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
+        };
       };
       cameras = {
         backyard-view-cam = {
