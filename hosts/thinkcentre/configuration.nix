@@ -111,10 +111,10 @@
         host = "localhost";
         port = "1883";
       };
-      birdseye = {
-        mode = "continous";
-      };
-      cameras = {        
+      cameras = {
+        birdseye = {
+          mode = "continous";
+        };
         backyard-view-cam = {
           ffmpeg = {
             output_args.record = "-f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac";
