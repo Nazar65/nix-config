@@ -141,7 +141,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 5;
+            fps = 20;
           };
           snapshots = {
             enabled = true;
@@ -177,7 +177,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 5;
+            fps = 20;
           };
           snapshots = {
             enabled = true;
@@ -213,7 +213,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 5;
+            fps = 20;
           };
           snapshots = {
             enabled = true;
@@ -249,7 +249,7 @@
             enabled = true;
             width = 640;
             height = 480;
-            fps = 5;
+            fps = 20;
           };
           snapshots = {
             enabled = true;
