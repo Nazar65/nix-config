@@ -129,7 +129,7 @@
           };
           birdseye = {
             enabled = true;
-            mode = continous;
+            mode = "continuous";
           };
           objects.track =
             [
@@ -169,7 +169,7 @@
           };
           birdseye = {
             enabled = true;
-            mode = continous;
+            mode = "continuous";
           };
           objects.track = 
             [
@@ -209,7 +209,7 @@
           };
           birdseye = {
             enabled = true;
-            mode = continous;
+            mode = "continuous";
           };
           objects.track =
             [
@@ -249,7 +249,7 @@
           };
           birdseye = {
             enabled = true;
-            mode = continous;
+            mode = "continuous";
           };
           objects.track =
             [
