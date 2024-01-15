@@ -185,7 +185,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
+                path = "rtsp://127.0.0.1:8554/backyard-view-cam";
                 roles = ["record"];
               }
               {
@@ -200,7 +200,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
+                path = "rtsp://127.0.0.1:8554/driveway-camera";
                 roles = ["record"];
               }
               {
@@ -215,7 +215,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1";
+                path = "rtsp://127.0.0.1:8554/frontgate-camera";
                 roles = ["record"];
               }
               {
@@ -230,7 +230,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1";
+                path = "rtsp://127.0.0.1:8554/neighborhood-camera";
                 roles = ["record"];
               }
               {
