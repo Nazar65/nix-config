@@ -112,7 +112,7 @@
       ];
       backyard-view-cam = [
         "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
-        "ffmpeg:backyard-view-cam#audio=aac
+        "ffmpeg:backyard-view-cam#audio=aac"
       ];
       neighborhood-camera = [
         "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
