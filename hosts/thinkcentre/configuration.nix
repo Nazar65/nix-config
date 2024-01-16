@@ -60,7 +60,7 @@
     pkgs.vaapiVdpau
     pkgs.libvdpau-va-gl
   ];
-  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984];
+  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984 8555];
   services.nginx.enable = true;
 
   services.esphome = {
@@ -104,6 +104,7 @@
 
   services.go2rtc = {
     enable = true;
+    settings.webrtc.candidates = "192.168.88.12:8555";
     settings.streams = {
       driveway-camera = [
         "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1"
