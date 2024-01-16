@@ -60,7 +60,7 @@
     pkgs.vaapiVdpau
     pkgs.libvdpau-va-gl
   ];
-  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984];
+  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984 8555];
   services.nginx.enable = true;
 
   services.esphome = {
@@ -111,7 +111,7 @@
       ];
       backyard-view-cam = [
         "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
-        "ffmpeg:backyard-view-cam#audio=aac"
+        "ffmpeg:backyard-view-cam#audio=opus
       ];
       neighborhood-camera = [
         "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
@@ -122,6 +122,10 @@
         "ffmpeg:frontgate-camera#audio=aac"
       ];
     };
+    webrtc.candidates = [
+      "192.168.88.12:8555"
+      "stun:8555"
+    ];
   };
 
   services.frigate = {
