@@ -60,7 +60,7 @@
     pkgs.vaapiVdpau
     pkgs.libvdpau-va-gl
   ];
-  networking.firewall.allowedTCPPorts = [80 443 8123 1883];
+  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984];
   services.nginx.enable = true;
   
   services.esphome = {
