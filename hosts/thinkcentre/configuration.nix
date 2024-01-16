@@ -18,12 +18,12 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "thinkcentre";
-  
+
   # Enable networking
   networking.networkmanager.enable = true;
 
   nixpkgs = {
-    overlays = [   
+    overlays = [
       (final: prev: {
         frigate = prev.frigate.overrideAttrs (oldAttrs: {
           postPatch = ''
@@ -34,13 +34,13 @@
       })
     ];
 
-    
+
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
     };
   };
-  
+
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";
 
@@ -62,7 +62,7 @@
   ];
   networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984];
   services.nginx.enable = true;
-  
+
   services.esphome = {
     enable = true;
     address = "0.0.0.0";
@@ -71,7 +71,7 @@
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
   ];
-  
+
   services.home-assistant = {
     enable = true;
     extraComponents = [
@@ -90,7 +90,7 @@
       "automation ui" = "!include /var/lib/hass/automations.yaml";
     };
   };
-  
+
   services.mosquitto = {
     enable = true;
     listeners = [
@@ -123,7 +123,7 @@
       ];
     };
   };
-  
+
   services.frigate = {
     enable = true;
     hostname = "nvr.klovanych.org";
@@ -185,7 +185,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://127.0.0.1:8554/backyard-view-cam";
+                path = "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1";
                 roles = ["record"];
               }
               {
@@ -200,7 +200,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://127.0.0.1:8554/driveway-camera";
+                path = "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1";
                 roles = ["record"];
               }
               {
@@ -215,7 +215,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://127.0.0.1:8554/frontgate-camera";
+                path = "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1";
                 roles = ["record"];
               }
               {
@@ -230,7 +230,7 @@
           ffmpeg = {
             inputs = [
               {
-                path = "rtsp://127.0.0.1:8554/neighborhood-camera";
+                path = "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1";
                 roles = ["record"];
               }
               {
@@ -265,7 +265,7 @@
     auto-optimise-store = true;
   };
 
-  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nazar = {
     isNormalUser = true;
@@ -282,7 +282,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWyZ1RlTRADJAFBoOpOOAcHtvILhDHtrrBLWaNeSg8v nazarn96@gmail.com"
   ];
 
-  
+
   # Open ports in the firewall.
   # networking.firewall.allowedUDPPorts = [ ... ];
 
