@@ -60,7 +60,7 @@
     pkgs.vaapiVdpau
     pkgs.libvdpau-va-gl
   ];
-  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984 8555];
+  networking.firewall.allowedTCPPorts = [80 443 8123 1883 1984];
   services.nginx.enable = true;
 
   services.esphome = {
@@ -122,10 +122,6 @@
         "ffmpeg:frontgate-camera#audio=aac"
       ];
     };
-    webrtc.candidates = [
-      "192.168.88.12:8555"
-      "stun:8555"
-    ];
   };
 
   services.frigate = {
