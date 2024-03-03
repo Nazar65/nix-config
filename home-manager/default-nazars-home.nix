@@ -41,7 +41,6 @@
       slack
       telegram-desktop
       gnome.gnome-tweaks
-      rnix-lsp
       nodejs
     ];
   };
@@ -53,12 +52,13 @@
     browsers = ["firefox"];
   };
 
-  services.emacs ={
-    enable = true;
-    startWithUserSession = "graphical";
-  };
+  programs.vscode = {
+  enable = true;
+  extensions = with pkgs.vscode-extensions; [
+    jnoortheen.nix-ide
+  ];
+};
 
-  programs.emacs.enable = true;
 
   accounts.email.accounts = {
     personal = {
@@ -131,9 +131,70 @@
   };
 
 
+  dconf.enable = true;
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      enable-hot-corners = false;
+    };
+
+    "org/gnome/desktop/input-sources" = { 
+      xkb-options = ["caps:ctrl_modifier"];
+    };
+    "org/gnome/desktop/background" = {
+      color-shading-type = "solid";
+      picture-options = "zoom";
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/pixels-l.jpg";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/pixels-d.jpg";
+      primary-color = "#967864";
+      secondary-color = "#000000";
+    };
+    "org/gnome/desktop/wm/keybindings" = {
+      switch-to-application-1 = [];
+      switch-to-application-2 = [];
+      switch-to-application-3 = [];
+      switch-to-application-4 = [];
+      switch-to-workspace-1 = ["<Super>1"];
+      switch-to-workspace-2 = ["<Super>2"];
+      switch-to-workspace-3 = ["<Super>3"];
+      switch-to-workspace-4 = ["<Super>4"];
+    };
+  };
+
+  gtk = {
+    enable = true;
+
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+
+    theme = {
+      name = "palenight";
+      package = pkgs.palenight-theme;
+    };
+
+    cursorTheme = {
+      name = "Numix-Cursor";
+      package = pkgs.numix-cursor-theme;
+    };
+
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+  };
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }

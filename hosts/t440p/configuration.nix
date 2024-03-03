@@ -10,19 +10,10 @@
     ./hardware-configuration.nix
   ];
 
-  # Bootloader.
+# Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
-  boot.initrd.luks.devices."luks-408c128c-e03d-4c8e-a927-ecdd107ab2e5".device = "/dev/disk/by-uuid/408c128c-e03d-4c8e-a927-ecdd107ab2e5";
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
-
-  boot.loader.grub.enableCryptodisk=true;
-  boot.initrd.luks.devices."luks-de73cffa-f905-4d61-954b-e483d5d41286".keyFile = "/crypto_keyfile.bin";
-  boot.initrd.luks.devices."luks-408c128c-e03d-4c8e-a927-ecdd107ab2e5".keyFile = "/crypto_keyfile.bin";
 
   nixpkgs = {
     # You can add overlays here
