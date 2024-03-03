@@ -53,6 +53,7 @@
   };
 
   programs.vscode = {
+  package = pkgs.vscodium;
   enable = true;
   extensions = with pkgs.vscode-extensions; [
     jnoortheen.nix-ide
