@@ -101,11 +101,23 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "uk_UA.UTF-8/UTF-8"
+  ];
+  
+
+services.strongswan = {
+    enable = true;
+    secrets = [
+      "ipsec.d/ipsec.nm-l2tp.secrets"
+    ];
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "us";
+    layout = "us,ua";
     xkbVariant = "";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;

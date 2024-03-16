@@ -96,6 +96,36 @@
 
   programs.firefox = {
     enable = true;
+    policies = {
+        DisableTelemetry = true;
+        DisableFirefoxStudies = true;
+        EnableTrackingProtection = {
+          Value= true;
+          Locked = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
+        DisablePocket = true;
+        DisableFirefoxAccounts = true;
+        DisableAccounts = true;
+        DisableFirefoxScreenshots = true;
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        DontCheckDefaultBrowser = true;
+        
+        ExtensionSettings = {
+          "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
+          # Privacy Badger:
+          "jid1-MnnxcxisBPnSXQ@jetpack" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          "browserpass@maximbaz.com" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4187654/browserpass_ce-3.8.0.xpi";
+            installation_mode = "force_installed";
+            };
+          };
+    };
   };
 
   programs.git = {
