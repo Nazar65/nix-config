@@ -106,21 +106,25 @@
     enable = true;
     settings.webrtc.candidates = "192.168.88.12:8555";
     settings.streams = {
-      driveway-camera = [
+      frontgate-right-camera-view = [
         "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1"
-        "ffmpeg:driveway-camera#audio=aac"
+        "ffmpeg:frontgate-right-camera-view#audio=aac"
       ];
-      backyard-view-cam = [
+      frontgate-left-camera-view = [
+        "rtsp://admin:3r5465XNlika31$@192.168.88.18:554/stream1"
+        "ffmpeg:frontgate-left-camera-view#audio=aac"
+      ];
+      driveway-camera-view = [
         "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
-        "ffmpeg:backyard-view-cam#audio=aac"
+        "ffmpeg:driveway-camera-view#audio=aac"
       ];
-      neighborhood-camera = [
+      backyard-camera-view = [
         "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
-        "ffmpeg:neighborhood-camera#audio=aac"
+        "ffmpeg:backyard-camera-view#audio=aac"
       ];
-      frontgate-camera = [
+      neighborhood-side-camera-view = [
         "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1"
-        "ffmpeg:frontgate-camera#audio=aac"
+        "ffmpeg:neighborhood-side-camera-view#audio=aac"
       ];
     };
   };
@@ -163,26 +167,30 @@
       };
       go2rtc = {
         streams = {
-          driveway-camera = [
-            "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1"
-            "ffmpeg:driveway-camera#audio=aac"
-          ];
-          backyard-view-cam = [
-            "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
-            "ffmpeg:backyard-view-cam#audio=aac"
-          ];
-          neighborhood-camera = [
-            "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
-            "ffmpeg:neighborhood-camera#audio=aac"
-          ];
-          frontgate-camera = [
-            "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1"
-            "ffmpeg:frontgate-camera#audio=aac"
-          ];
+      frontgate-right-camera-view = [
+        "rtsp://admin:UDF23If3weoEsA23GHndsdEW8x@192.168.88.64:554/stream1"
+        "ffmpeg:frontgate-right-camera-view#audio=aac"
+      ];
+      frontgate-left-camera-view = [
+        "rtsp://admin:3r5465XNlika31%@192.168.88.18:554/stream1"
+        "ffmpeg:frontgate-left-camera-view#audio=aac"
+      ];
+      driveway-camera-view = [
+        "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
+        "ffmpeg:driveway-camera-view#audio=aac"
+      ];
+      backyard-camera-view = [
+        "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
+        "ffmpeg:backyard-camera-view#audio=aac"
+      ];
+      neighborhood-side-camera-view = [
+        "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1"
+        "ffmpeg:neighborhood-side-camera-view#audio=aac"
+      ];
         };
       };
       cameras = {
-        backyard-view-cam = {
+        driveway-camera-view = {
           ffmpeg = {
             inputs = [
               {
@@ -197,7 +205,7 @@
           };
           record.enabled = true;
         };
-        driveway-camera = {
+        frontgate-right-camera-view = {
           ffmpeg = {
             inputs = [
               {
@@ -212,7 +220,22 @@
           };
           record.enabled = true;
         };
-        frontgate-camera = {
+        frontgate-left-camera-view = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://admin:3r5465XNlika31$@192.168.88.18:554/stream1";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://admin:3r5465XNlika31$@192.168.88.18:554/stream2";
+                roles = ["detect"];
+              }
+            ];
+          };
+          record.enabled = true;
+        };
+        neighborhood-side-camera-view = {
           ffmpeg = {
             inputs = [
               {
@@ -227,7 +250,7 @@
           };
           record.enabled = true;
         };
-        neighborhood-camera = {
+        backyard-camera-view = {
           ffmpeg = {
             inputs = [
               {
@@ -273,14 +296,14 @@
     description = "nazar";
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWyZ1RlTRADJAFBoOpOOAcHtvILhDHtrrBLWaNeSg8v nazarn96@gmail.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFJ25+ECs9FIYy/QeNQ26l4dQv6JyQ/HIetjtLjowP4 nazar@t440p"
     ];
     packages = with pkgs; [
       git
     ];
   };
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHWyZ1RlTRADJAFBoOpOOAcHtvILhDHtrrBLWaNeSg8v nazarn96@gmail.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFJ25+ECs9FIYy/QeNQ26l4dQv6JyQ/HIetjtLjowP4 nazar@t440p"
   ];
 
 
