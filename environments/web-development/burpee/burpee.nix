@@ -10,6 +10,7 @@ in {
     pkgs.gnupatch
     pkgs.n98-magerun2
     pkgs.envsubst
+    pkgs.php81Packages.php-cs-fixer
   ];
 
   scripts.composer.exec = ''php ${composerPhar} $@'';
