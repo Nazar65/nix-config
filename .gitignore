@@ -1,2 +1,4 @@
 .devenv
+.direnv
 .devenv.flake.nix
+environments/web-development/source/
