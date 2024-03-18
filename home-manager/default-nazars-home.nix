@@ -204,7 +204,9 @@ in {
     enable = true;
     pinentryFlavor = "gnome3";
   };
-
+  
+  programs.direnv.enable = true;
+  
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -216,6 +218,7 @@ in {
       ll = "ls -l";
       home-flake-switch = "home-manager switch --flake $*";
       system-rebuild-switch = "sudo nixos-rebuild switch --flake $*";
+      magento-cloud =  "/home/nazar/.magento-cloud/bin/magento-cloud $*";
     };
   };
 
