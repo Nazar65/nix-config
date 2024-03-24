@@ -18,11 +18,6 @@
       fsType = "ext4";
     };
 
-  fileSystems."/home/nazar/usb" =
-    { device = "/dev/disk/by-uuid/1234-5678";
-      fsType = "vfat";
-    };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
