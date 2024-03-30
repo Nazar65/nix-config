@@ -19,7 +19,7 @@ in {
 
   env = {
     PROJECT_HOST = "burpee.local:8081";
-    APP_ROOT = "/home/nazar/environments/web-development/source/burpee";
+    APP_ROOT = "/home/nazar/nix-config/environments/web-development/source/burpee";
     DOLLAR="$";
     DEVENV_HTTP_PORT = "8081";
     DEVENV_MAIL_UI_PORT = "3031";
