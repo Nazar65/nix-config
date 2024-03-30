@@ -1,12 +1,13 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
+{ inputs
+, lib
+, config
+, pkgs
+, ...
+}:
+let
   inherit (lib.hm.gvariant) mkTuple;
-in {
+in
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -45,6 +46,7 @@ in {
       telegram-desktop
       gnome.gnome-tweaks
       nodejs
+      nixpkgs-fmt
     ];
   };
 
@@ -52,16 +54,20 @@ in {
   programs.home-manager.enable = true;
   programs.browserpass = {
     enable = true;
-    browsers = ["firefox"];
+    browsers = [ "firefox" ];
   };
 
   programs.vscode = {
-  package = pkgs.vscodium;
-  enable = true;
-  extensions = with pkgs.vscode-extensions; [
-    jnoortheen.nix-ide
-  ];
-};
+    package = pkgs.vscodium;
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      tuttieee.emacs-mcx
+      kahole.magit
+      mkhl.direnv
+      bmewburn.vscode-intelephense-client
+      jnoortheen.nix-ide
+    ];
+  };
 
 
   accounts.email.accounts = {
@@ -76,7 +82,7 @@ in {
   programs.thunderbird = {
     enable = true;
     profiles.personal = {
-      isDefault= true;
+      isDefault = true;
       settings = {
         "calendar.timezone.local" = "Europe/Kiev";
         "calendar.timezone.useSystemTimezone" = true;
@@ -99,7 +105,7 @@ in {
 
   programs.firefox = {
     enable = true;
-     profiles.main = {
+    profiles.main = {
       search.default = "DuckDuckGo";
       bookmarks = { };
       settings = {
@@ -112,77 +118,77 @@ in {
         "identity.fxaccounts.enabled" = false;
         "privacy.trackingprotection.enabled" = true;
         # Privacy
-            "app.shield.optoutstudies.enabled" = false;
-            "browser.discovery.enabled" = false;
-            "browser.formfill.enable" = false;
-            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
-            "browser.newtabpage.activity-stream.telemetry" = false;
-            "browser.ping-centre.telemetry" = false;
-            "browser.urlbar.suggest.bookmark" = false;
-            "browser.urlbar.suggest.engines" = false;
-            "browser.urlbar.suggest.history" = false;
-            "browser.urlbar.suggest.openpage" = false;
-            "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
-            "browser.urlbar.suggest.quicksuggest.sponsored" = false;
-            "browser.urlbar.suggest.topsites" = false;
-            "datareporting.healthreport.uploadEnabled" = false;
-            "datareporting.policy.dataSubmissionEnabled" = false;
-            "dom.security.https_only_mode" = true;
-            "dom.security.https_only_mode_ever_enabled" = true;
-            "places.history.enabled" = false;
-            "privacy.donottrackheader.enabled" = true;
-            "privacy.history.custom" = true;
-            "signon.autofillForms" = false;
-            "signon.generation.enabled" = false;
-            "signon.management.page.breach-alerts.enabled" = false;
-            "signon.rememberSignons" = false;
-            "extensions.formautofill.addresses.enabled" = false;
-            "extensions.formautofill.creditCards.enabled" = false;
-            "security.protectionspopup.recordEventTelemetry" = false;
-            "security.identitypopup.recordEventTelemetry" = false;
-            "security.certerrors.recordEventTelemetry" = false;
-            "security.app_menu.recordEventTelemetry" = false;
-            "toolkit.telemetry.archive.enabled" = false;
-            "toolkit.telemetry.bhrPing.enabled" = false;
-            "toolkit.telemetry.firstShutdownPing.enabled" = false;
-            "toolkit.telemetry.newProfilePing.enabled" = false;
-            "toolkit.telemetry.pioneer-new-studies-available" = false;
-            "toolkit.telemetry.reportingpolicy.firstRun" = false;
-            "toolkit.telemetry.shutdownPingSender.enabled" = false;
-            "toolkit.telemetry.unified" = false;
-            "toolkit.telemetry.updatePing.enabled" = false;
-            "browser.tabs.firefox-view" = false;
+        "app.shield.optoutstudies.enabled" = false;
+        "browser.discovery.enabled" = false;
+        "browser.formfill.enable" = false;
+        "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+        "browser.newtabpage.activity-stream.telemetry" = false;
+        "browser.ping-centre.telemetry" = false;
+        "browser.urlbar.suggest.bookmark" = false;
+        "browser.urlbar.suggest.engines" = false;
+        "browser.urlbar.suggest.history" = false;
+        "browser.urlbar.suggest.openpage" = false;
+        "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
+        "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+        "browser.urlbar.suggest.topsites" = false;
+        "datareporting.healthreport.uploadEnabled" = false;
+        "datareporting.policy.dataSubmissionEnabled" = false;
+        "dom.security.https_only_mode" = true;
+        "dom.security.https_only_mode_ever_enabled" = true;
+        "places.history.enabled" = false;
+        "privacy.donottrackheader.enabled" = true;
+        "privacy.history.custom" = true;
+        "signon.autofillForms" = false;
+        "signon.generation.enabled" = false;
+        "signon.management.page.breach-alerts.enabled" = false;
+        "signon.rememberSignons" = false;
+        "extensions.formautofill.addresses.enabled" = false;
+        "extensions.formautofill.creditCards.enabled" = false;
+        "security.protectionspopup.recordEventTelemetry" = false;
+        "security.identitypopup.recordEventTelemetry" = false;
+        "security.certerrors.recordEventTelemetry" = false;
+        "security.app_menu.recordEventTelemetry" = false;
+        "toolkit.telemetry.archive.enabled" = false;
+        "toolkit.telemetry.bhrPing.enabled" = false;
+        "toolkit.telemetry.firstShutdownPing.enabled" = false;
+        "toolkit.telemetry.newProfilePing.enabled" = false;
+        "toolkit.telemetry.pioneer-new-studies-available" = false;
+        "toolkit.telemetry.reportingpolicy.firstRun" = false;
+        "toolkit.telemetry.shutdownPingSender.enabled" = false;
+        "toolkit.telemetry.unified" = false;
+        "toolkit.telemetry.updatePing.enabled" = false;
+        "browser.tabs.firefox-view" = false;
       };
     };
     policies = {
-        DisableTelemetry = true;
-        DisableFirefoxStudies = true;
-        EnableTrackingProtection = {
-          Value= true;
-          Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
+      DisableTelemetry = true;
+      DisableFirefoxStudies = true;
+      EnableTrackingProtection = {
+        Value = true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+      DisablePocket = true;
+      DisableFirefoxAccounts = true;
+      DisableAccounts = true;
+      DisableFirefoxScreenshots = true;
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      DontCheckDefaultBrowser = true;
+
+      ExtensionSettings = {
+        "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
+        # Privacy Badger:
+        "jid1-MnnxcxisBPnSXQ@jetpack" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
+          installation_mode = "force_installed";
         };
-        DisablePocket = true;
-        DisableFirefoxAccounts = true;
-        DisableAccounts = true;
-        DisableFirefoxScreenshots = true;
-        OverrideFirstRunPage = "";
-        OverridePostUpdatePage = "";
-        DontCheckDefaultBrowser = true;
-        
-        ExtensionSettings = {
-          "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
-          # Privacy Badger:
-          "jid1-MnnxcxisBPnSXQ@jetpack" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
-            installation_mode = "force_installed";
-          };
-          "browserpass@maximbaz.com" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/file/4187654/browserpass_ce-3.8.0.xpi";
-            installation_mode = "force_installed";
-            };
-          };
+        "browserpass@maximbaz.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4187654/browserpass_ce-3.8.0.xpi";
+          installation_mode = "force_installed";
+        };
+      };
     };
   };
 
@@ -200,13 +206,13 @@ in {
     };
   };
 
-  services.gpg-agent ={
+  services.gpg-agent = {
     enable = true;
     pinentryFlavor = "gnome3";
   };
-  
+
   programs.direnv.enable = true;
-  
+
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -218,7 +224,7 @@ in {
       ll = "ls -l";
       home-flake-switch = "home-manager switch --flake $*";
       system-rebuild-switch = "sudo nixos-rebuild switch --flake $*";
-      magento-cloud =  "/home/nazar/.magento-cloud/bin/magento-cloud $*";
+      magento-cloud = "/home/nazar/.magento-cloud/bin/magento-cloud $*";
     };
   };
 
@@ -230,14 +236,14 @@ in {
       enable-hot-corners = false;
     };
 
-    "org/gnome/desktop/input-sources" = { 
+    "org/gnome/desktop/input-sources" = {
       show-all-sources = true;
       per-window = true;
       sources = [
-          (mkTuple ["xkb" "us"])
-          (mkTuple ["xkb" "ua"])
+        (mkTuple [ "xkb" "us" ])
+        (mkTuple [ "xkb" "ua" ])
       ];
-      xkb-options = ["caps:ctrl_modifier"];
+      xkb-options = [ "caps:ctrl_modifier" ];
     };
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
@@ -248,14 +254,14 @@ in {
       secondary-color = "#000000";
     };
     "org/gnome/desktop/wm/keybindings" = {
-      switch-to-application-1 = [];
-      switch-to-application-2 = [];
-      switch-to-application-3 = [];
-      switch-to-application-4 = [];
-      switch-to-workspace-1 = ["<Super>1"];
-      switch-to-workspace-2 = ["<Super>2"];
-      switch-to-workspace-3 = ["<Super>3"];
-      switch-to-workspace-4 = ["<Super>4"];
+      switch-to-application-1 = [ ];
+      switch-to-application-2 = [ ];
+      switch-to-application-3 = [ ];
+      switch-to-application-4 = [ ];
+      switch-to-workspace-1 = [ "<Super>1" ];
+      switch-to-workspace-2 = [ "<Super>2" ];
+      switch-to-workspace-3 = [ "<Super>3" ];
+      switch-to-workspace-4 = [ "<Super>4" ];
     };
   };
 
