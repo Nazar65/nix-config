@@ -85,6 +85,7 @@
   networking.extraHosts =
     ''
     127.0.0.1 burpee.local
+    127.0.0.1 reinders.local
   '';
   # Set your time zone.
   time.timeZone = "Europe/Kyiv";

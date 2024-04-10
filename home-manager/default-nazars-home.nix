@@ -107,7 +107,54 @@ in
     enable = true;
     profiles.main = {
       search.default = "DuckDuckGo";
-      bookmarks = { };
+      bookmarks = [
+        {
+          name = "Default";
+          toolbar = true;
+          bookmarks = [
+          {
+              name = "Atwix Worklog";
+              keyword = "!w";
+              url = "https://atwix.atlassian.net/plugins/servlet/ac/io.tempo.jira/tempo-app#!/my-work/week";
+          }
+          {
+              name = "Burpee Worklog";
+              keyword = "!wb";
+              url = "https://burpeeit.atlassian.net/plugins/servlet/ac/clockwork-cloud/clockwork-mywork?project.key=MAG&project.id=12401";
+          }
+          {
+              name = "Multipliers review";
+              keyword = "!m";
+              url = "https://docs.google.com/spreadsheets/d/1l6mED2qXu-1iHIaKqJV0601kyhR2vRVSwSEPMedl5fI/edit#gid=1100951830";
+          }
+          {
+              name = "Burpee sprint board";
+              keyword = "!bb";
+              url = "https://burpeeit.atlassian.net/jira/software/c/projects/MAG/boards/10?assignee=6238438ab75ca8007054faba";
+          }
+          {
+              name = "Burpee's Cloud";
+              keyword = "!bc";
+              url = "https://console.adobecommerce.com/tom-tweedie/j5axkcqyhe6rg/production";
+          }
+          {
+              name = "nvr.klovanych.org";
+              keyword = "!k";
+              url = "http://nvr.klovanych.org/events";
+          }
+          {
+              name = "Deezer";
+              keyword = "!d";
+              url = "https://www.deezer.com/us/profile/2276729044/loved";
+          }
+          {
+            name = "Cabinet tax";
+            keyword = "!t";
+            url = "https://cabinet.tax.gov.ua";
+          }
+          ];
+       }
+      ];
       settings = {
         "browser.disableResetPrompt" = true;
         "browser.download.panel.shown" = true;
@@ -126,7 +173,7 @@ in
         "browser.ping-centre.telemetry" = false;
         "browser.urlbar.suggest.bookmark" = false;
         "browser.urlbar.suggest.engines" = false;
-        "browser.urlbar.suggest.history" = false;
+        "browser.urlbar.suggest.history" = true;
         "browser.urlbar.suggest.openpage" = false;
         "browser.urlbar.suggest.quicksuggest.nonsponsored" = false;
         "browser.urlbar.suggest.quicksuggest.sponsored" = false;
@@ -163,6 +210,13 @@ in
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
+      FirefoxHome = {
+        Search = true;
+        Pocket = false;
+        Snippets = false;
+        TopSites = false;
+        Highlights = false;
+      };
       EnableTrackingProtection = {
         Value = true;
         Locked = true;

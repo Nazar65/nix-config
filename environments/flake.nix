@@ -16,7 +16,7 @@
     in
       {
         packages = forEachSystem (system: {
-          devenv-up = self.devShells.${system}.default.config.procfileScript;
+          devenv-up = self.devShells.${system}.reinders.config.procfileScript;
         });
 
         devShells = forEachSystem
@@ -25,10 +25,16 @@
               pkgs = nixpkgs.legacyPackages.${system};
             in
               {
-                default = devenv.lib.mkShell {
+                burpee = devenv.lib.mkShell {
                   inherit inputs pkgs;
                   modules = [
                     ./web-development/burpee/burpee.nix
+                  ];
+                };
+                reinders = devenv.lib.mkShell {
+                  inherit inputs pkgs;
+                  modules = [
+                    ./web-development/reinders/reinders.nix
                   ];
                 };
               });
