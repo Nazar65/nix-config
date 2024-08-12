@@ -122,6 +122,10 @@
         "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
         "ffmpeg:backyard-camera-view#audio=aac"
       ];
+      backyard-enterance-camera-view = [
+        "rtsp://admin:Xz4cgRXmWmqrXih3Xnny@192.168.88.29:554/stream1"
+        "ffmpeg:backyard-enterance-camera-view#audio=aac"
+      ];
       neighborhood-side-camera-view = [
         "rtsp://admin:Dj3CUvD34gjU2lLB6H0PlDF@192.168.88.65:554/stream1"
         "ffmpeg:neighborhood-side-camera-view#audio=aac"
@@ -178,6 +182,10 @@
       driveway-camera-view = [
         "rtsp://admin:GwAHjK60CwjhZ5BmOQx@192.168.88.37:554/stream1"
         "ffmpeg:driveway-camera-view#audio=aac"
+      ];
+      backyard-enterance-camera-view = [
+        "rtsp://admin:Xz4cgRXmWmqrXih3Xnny@192.168.88.29:554/stream1"
+        "ffmpeg:backyard-camera-view#audio=aac"
       ];
       backyard-camera-view = [
         "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream1"
@@ -259,6 +267,21 @@
               }
               {
                 path = "rtsp://admin:aiEw3GfV5l23dN4lP@192.168.88.66:554/stream2";
+                roles = ["detect"];
+              }
+            ];
+          };
+          record.enabled = true;
+        };
+        backyard-enterance-camera-view = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://admin:Xz4cgRXmWmqrXih3Xnny@192.168.88.29:554/stream1";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://admin:Xz4cgRXmWmqrXih3Xnny@192.168.88.29:554/stream2";
                 roles = ["detect"];
               }
             ];
