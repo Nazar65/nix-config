@@ -42,9 +42,6 @@ in
     homeDirectory = "/home/nazar";
     packages = with pkgs; [
       slack
-      fractal
-      telegram-desktop
-      gnome.gnome-tweaks
       nodejs
       nixpkgs-fmt
     ];
@@ -52,23 +49,6 @@ in
 
   # Add stuff for your user as you see fit:
   programs.home-manager.enable = true;
-  programs.browserpass = {
-    enable = true;
-    browsers = [ "firefox" ];
-  };
-
-  programs.vscode = {
-    package = pkgs.vscodium;
-    enable = true;
-    extensions = with pkgs.vscode-extensions; [
-      tuttieee.emacs-mcx
-      kahole.magit
-      mkhl.direnv
-      bmewburn.vscode-intelephense-client
-      jnoortheen.nix-ide
-    ];
-  };
-
 
   accounts.email.accounts = {
     personal = {
@@ -79,23 +59,7 @@ in
     };
   };
 
-  programs.thunderbird = {
-    enable = true;
-    profiles.personal = {
-      isDefault = true;
-      settings = {
-        "calendar.timezone.local" = "Europe/Kiev";
-        "calendar.timezone.useSystemTimezone" = true;
-        "datareporting.healthreport.uploadEnabled" = false;
-        "mail.incorporate.return_receipt" = 1;
-        "mail.markAsReadOnSpam" = true;
-        "mail.spam.logging.enabled" = true;
-        "mail.spam.manualMark" = true;
-        "offline.download.download_messages" = 1;
-      };
-    };
-  };
-
+  programs.fish.enable = true;
   programs.password-store = {
     enable = true;
     settings = {
@@ -260,13 +224,22 @@ in
     };
   };
 
-  services.gpg-agent = {
+  services.gpg-agent.pinentryPackage = {
     enable = true;
     pinentryFlavor = "gnome3";
   };
 
   programs.direnv.enable = true;
-
+  wayland.windowManager.sway = {
+  enable = true;
+  config = rec {
+  modifier = "Mod4";
+  startup = [
+  { command = "firefox"; }
+  { command = "fish"; }
+  ];
+  };
+};
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -288,34 +261,6 @@ in
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
-    };
-
-    "org/gnome/desktop/input-sources" = {
-      show-all-sources = true;
-      per-window = true;
-      sources = [
-        (mkTuple [ "xkb" "us" ])
-        (mkTuple [ "xkb" "ua" ])
-      ];
-      xkb-options = [ "caps:ctrl_modifier" ];
-    };
-    "org/gnome/desktop/background" = {
-      color-shading-type = "solid";
-      picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/pixels-l.jpg";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/pixels-d.jpg";
-      primary-color = "#967864";
-      secondary-color = "#000000";
-    };
-    "org/gnome/desktop/wm/keybindings" = {
-      switch-to-application-1 = [ ];
-      switch-to-application-2 = [ ];
-      switch-to-application-3 = [ ];
-      switch-to-application-4 = [ ];
-      switch-to-workspace-1 = [ "<Super>1" ];
-      switch-to-workspace-2 = [ "<Super>2" ];
-      switch-to-workspace-3 = [ "<Super>3" ];
-      switch-to-workspace-4 = [ "<Super>4" ];
     };
   };
 
@@ -354,5 +299,5 @@ in
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 }

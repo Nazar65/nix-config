@@ -3,10 +3,10 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO: Add any other flake you might need
@@ -23,13 +23,9 @@
   in {
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      t440p = nixpkgs.lib.nixosSystem {
+      dell-optiplex = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/t440p/configuration.nix];
-      };
-      x220 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/x220/configuration.nix];
+        modules = [./hosts/dell-optiplex/configuration.nix];
       };
       thinkcentre = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -37,13 +33,13 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "base-nazars-home" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/default-nazars-home.nix];
+      "nazars-home" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+        };
+        modules = [./home-manager/nazars-home.nix];
       };
     };
   };

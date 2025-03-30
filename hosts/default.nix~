@@ -27,17 +27,17 @@
   };
 
   environment.shells = with pkgs; [ zsh ];
-  services.blueman.enable = true;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  hardware.graphics.enable = true;
+  hardware.pulseaudio.enable = false;
+  # better performance than the actual Intel driver
+  services.xserver.videoDrivers = ["modesetting"];
+  hardware.opengl.enable = true;
   hardware.opengl.extraPackages = [
     pkgs.intel-media-driver
     pkgs.vaapiIntel
     pkgs.vaapiVdpau
     pkgs.libvdpau-va-gl
   ];
-
+  security.rtkit.enable = true;
   networking.networkmanager.enable = true;
   networking.extraHosts =
     ''
@@ -54,19 +54,30 @@
     "uk_UA.UTF-8/UTF-8"
   ];
 
-  xdg.portal  = {
+xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-wlr # Backend for wayland roots
+  ];
+    services.xserver.enable = false;
+  security.pam.services.swaylock = {};
+
+  xdg.portal.wlr.enable = true;
+services.greetd = {
     enable = true;
-    extraPortals = [
-      # To make slack screen-sharing possible
-      pkgs.xdg-desktop-portal-wlr
-      # gtk portal needed to make gtk apps happy
-      pkgs.xdg-desktop-portal-gtk
+    settings = {
+      default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd ${pkgs.sway}/bin/sway";
+      initial_session = {
+        command = "sway -";
+        user = "nazar";
+      };
+    };
+  };
+services.strongswan = {
+    enable = true;
+    secrets = [
+      "ipsec.d/ipsec.nm-l2tp.secrets"
     ];
-    #xdgOpenUsePortal = true;
-    wlr.enable = true;
   };
 
-  
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -74,17 +85,6 @@
     pulse.enable = true;
   };
 
-  security.pam.services.swaylock = {};
-  security.polkit.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-	      user = "greeter";
-      };
-    };
-  };
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -114,6 +114,12 @@
       isNormalUser = true;     
       extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [
+      mako
+      swaylock
+      wayland
+      wl-clipboard
+      xwayland
+      home-manager
       ];
     };
   };
