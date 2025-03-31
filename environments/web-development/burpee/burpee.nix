@@ -19,15 +19,15 @@ in {
 
   env = {
     PROJECT_HOST = "burpee.local:8081";
-    APP_ROOT = "/home/nazar/nix-config/environments/web-development/source/burpee";
+    APP_ROOT = "/home/nazar/Projects/burpee";
     DOLLAR="$";
     DEVENV_HTTP_PORT = "8081";
     DEVENV_MAIL_UI_PORT = "3031";
     DEVENV_MAIL_SMTP_PORT = "3032";
 
     NGINX_PKG_ROOT = pkgs.nginx;
-    DEVENV_STATE_NGINX = "${config.env.DEVENV_STATE}/nginx";
-    DEVENV_PHPFPM_SOCKET = "${config.env.DEVENV_STATE}/php-fpm.sock";
+    DEVENV_STATE_NGINX = "/home/nazar/Projects/burpee/.devenv/state/nginx";
+    DEVENV_PHPFPM_SOCKET = "/home/nazar/Projects/burpee/.devenv/state/php-fpm.sock";
 
     DEVENV_DB_NAME = "burpee";
     DEVENV_DB_USER = "burpee";
@@ -87,8 +87,8 @@ in {
 
   enterShell = ''
     mkdir -p ${config.env.DEVENV_STATE}/nginx/tmp/
-    envsubst < ${config.env.DEVENV_ROOT}/nginx/nginx-template.conf > ${config.env.DEVENV_STATE}/nginx/nginx.conf
-    envsubst < ${config.env.DEVENV_ROOT}/nginx/magento2-template.conf > ${config.env.DEVENV_STATE}/nginx/magento2.conf
+    envsubst < ${config.env.DEVENV_ROOT}/nginx/nginx-template.conf > /home/nazar/Projects/burpee/.devenv/state/nginx/nginx.conf
+    envsubst < ${config.env.DEVENV_ROOT}/nginx/magento2-template.conf > /home/nazar/Projects/burpee/.devenv/state/nginx/magento2.conf
   '';
 
   services.rabbitmq = {

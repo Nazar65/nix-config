@@ -1,0 +1,56 @@
+# The Sway configuration file in ~/.config/sway/config calls this script.
+# You should see changes to the status bar after saving this script.
+# If not, do "killall swaybar" and $mod+Shift+c to reload the configuration.
+
+# The abbreviated weekday (e.g., "Sat"), followed by the ISO-formatted date
+# like 2018-10-06 and the time (e.g., 14:01)\
+    while true; do
+	date_formatted=$(date "+ %A %b %d %H:%M:%S ")
+
+	vpn_status=$(nmcli --mode tabular --terse connection show --active | grep vpn | cut -d ':' -f1)
+
+	if [ -z "$vpn_status" ]; then
+	    vpn_status="no vpn";
+	fi
+	# Get the cpu load
+	cpu_load=$(sh ~/.config/sway/cpu-usage.sh)
+
+	#get mem load
+	mem_load=$(printf "%.0f\n" $(free | grep Mem | awk '{print $3/$2 * 100.0}'))%
+
+	#Sound
+	if [[ ! $(command -v pactl) ]]; then
+	    if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
+		volume_emoji=🔇
+		volume_level="MUTED"
+	    else
+		volume_emoji=🔊
+		volume_level=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 2 | awk '{printf "%2.0f%%\n", 100 * $1}')
+	    fi
+	    if [[ -n $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d ' ' -f 3 | sed 's/^.//;s/.$//') ]]; then
+		mic_emoji=
+		mic_level="MUTED"
+	    else
+		mic_emoji=
+		mic_level=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d ' ' -f 2 | awk '{printf "%2.0f%%\n", 100 * $1}')
+	    fi
+	else
+	    if [[ $(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}') == "yes" ]]; then
+		volume_emoji=🔇
+		volume_level="MUTED"
+	    else
+		volume_emoji=🔊
+		volume_level=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
+	    fi
+	    if [[ $(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}') == "yes" ]]; then
+		mic_emoji=
+		mic_level="MUTED"
+	    else
+		mic_emoji=
+		mic_level=$(pactl get-source-volume @DEFAULT_SOURCE@ | awk '{print $5}')
+	    fi
+	fi
+
+	echo $mic_emoji $mic_level $volume_emoji $volume_level 🔐 $vpn_status 📩 $mail_count 💾 $mem_load 🤖 $cpu_load 📅 $date_formatted
+	sleep 1
+    done;

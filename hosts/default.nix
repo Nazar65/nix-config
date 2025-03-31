@@ -31,7 +31,7 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.graphics.enable = true;
-  hardware.opengl.extraPackages = [
+  hardware.graphics.extraPackages = [
     pkgs.intel-media-driver
     pkgs.vaapiIntel
     pkgs.vaapiVdpau
@@ -54,7 +54,7 @@
     "uk_UA.UTF-8/UTF-8"
   ];
 
-  xdg.portal  = {
+  xdg.portal.config  = {
     enable = true;
     extraPortals = [
       # To make slack screen-sharing possible
@@ -66,7 +66,14 @@
     wlr.enable = true;
   };
 
-  
+   programs.ssh = {
+     startAgent = true;
+  };
+  fileSystems."/mnt/media" = {
+    device = "//192.168.88.20/thegoat";
+    fsType = "cifs";
+    options = [ "username=spyware" "password=3r5465XNlika31" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s"];
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -74,6 +81,7 @@
     pulse.enable = true;
   };
 
+    programs.dconf.enable = true; 
   security.pam.services.swaylock = {};
   security.polkit.enable = true;
   services.greetd = {
@@ -114,6 +122,7 @@
       isNormalUser = true;     
       extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [
+        cifs-utils 
       ];
     };
   };

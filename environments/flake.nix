@@ -16,7 +16,7 @@
     in
       {
         packages = forEachSystem (system: {
-          devenv-up = self.devShells.${system}.reinders.config.procfileScript;
+          devenv-up = self.devShells.${system}.burpee.config.procfileScript;
         });
 
         devShells = forEachSystem
