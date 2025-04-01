@@ -1,14 +1,13 @@
 return {
-  "williamboman/mason.nvim",
-  opts = {
-    ensure_installed = {
-      "intelephense",
-      "phpactor",
-      "html-lsp",
-      "php-debug-adapter",
-      "phpstan",
-      "twig-cs-fixer",
-      "twiggy-language-server",
-    },
-  },
+	"williamboman/mason.nvim",
+	opts = {
+		ensure_installed = {
+			"intelephense",
+			"alejandra",
+			"prettierd",
+			"stylua",
+			"php-cs-fixer",
+			"twiggy-language-server",
+		},
+	},
 }
