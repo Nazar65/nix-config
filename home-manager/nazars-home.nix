@@ -51,12 +51,17 @@ in {
       foot
       gnupg
       stylua
-      neovim-qt
+      wofi
+      dmenu
+      neovide
+      python311Packages.tldextract
       fira-code
       fira-code-symbols
       font-awesome
       nerdfonts
       cargo
+      fzf
+      ripgrep
       luarocks
       cmake
       unzip
@@ -170,6 +175,7 @@ in {
         modules-right = [
           "tray"
           "pulseaudio"
+          "custom/vpn"
           "cpu"
           "memory"
           "temperature"
@@ -192,6 +198,11 @@ in {
             };
           };
           "tooltip-format" = "<tt>{calendar}</tt>";
+        };
+        "custom/vpn" = {
+          format = " VPN: {}";
+          exec = "nmcli --mode tabular --terse connection show --active | grep vpn | cut -d ':' -f1";
+          interval = 1;
         };
         cpu = {
           interval = 1;

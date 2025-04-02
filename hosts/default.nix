@@ -5,7 +5,6 @@
   pkgs,
   ...
 }: {
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -19,14 +18,14 @@
       #   });
       # })
     ];
-    
+
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
     };
   };
 
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [zsh];
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -38,9 +37,13 @@
     pkgs.libvdpau-va-gl
   ];
 
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [51820];
+    checkReversePath = false; #wireguard
+  };
   networking.networkmanager.enable = true;
-  networking.extraHosts =
-    ''
+  networking.extraHosts = ''
     127.0.0.1 burpee.local
     127.0.0.1 reinders.local
   '';
@@ -54,7 +57,7 @@
     "uk_UA.UTF-8/UTF-8"
   ];
 
-  xdg.portal.config  = {
+  xdg.portal.config = {
     enable = true;
     extraPortals = [
       # To make slack screen-sharing possible
@@ -66,13 +69,13 @@
     wlr.enable = true;
   };
 
-   programs.ssh = {
-     startAgent = true;
+  programs.ssh = {
+    startAgent = true;
   };
   fileSystems."/mnt/media" = {
     device = "//192.168.88.20/thegoat";
     fsType = "cifs";
-    options = [ "username=spyware" "password=3r5465XNlika31" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s"];
+    options = ["username=spyware" "password=3r5465XNlika31" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s"];
   };
   services.pipewire = {
     enable = true;
@@ -81,7 +84,7 @@
     pulse.enable = true;
   };
 
-    programs.dconf.enable = true; 
+  programs.dconf.enable = true;
   security.pam.services.swaylock = {};
   security.polkit.enable = true;
   services.greetd = {
@@ -89,7 +92,7 @@
     settings = {
       default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-	      user = "greeter";
+        user = "greeter";
       };
     };
   };
@@ -103,11 +106,11 @@
   nix.nixPath = ["/etc/nix/path"];
   environment.etc =
     lib.mapAttrs'
-      (name: value: {
-        name = "nix/path/${name}";
-        value.source = value.flake;
-      })
-      config.nix.registry;
+    (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    })
+    config.nix.registry;
 
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -115,14 +118,17 @@
   };
 
   programs.zsh.enable = true;
-  
+
   users.users = {
     nazar = {
+      openssh.authorizedKeys.keyFiles = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFJ25+ECs9FIYy/QeNQ26l4dQv6JyQ/HIetjtLjowP4 nazar@t440p"
+      ];
       shell = pkgs.zsh;
-      isNormalUser = true;     
+      isNormalUser = true;
       extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [
-        cifs-utils 
+        cifs-utils
       ];
     };
   };
