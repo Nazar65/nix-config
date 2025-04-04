@@ -121,7 +121,7 @@
 
   users.users = {
     nazar = {
-      openssh.authorizedKeys.keyFiles = [
+      openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFJ25+ECs9FIYy/QeNQ26l4dQv6JyQ/HIetjtLjowP4 nazar@t440p"
       ];
       shell = pkgs.zsh;

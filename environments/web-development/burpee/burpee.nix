@@ -1,6 +1,10 @@
-{ inputs, pkgs, config, ... }:
-let
-  composerPhar = builtins.fetchurl{
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}: let
+  composerPhar = builtins.fetchurl {
     url = "https://github.com/composer/composer/releases/download/2.2.22/composer.phar";
     sha256 = "1lmibmdlk2rsrf4zr7xk4yi5rhlmmi8f2g8h2izb8x4sik600dbx";
   };
@@ -10,7 +14,7 @@ in {
     pkgs.gnupatch
     pkgs.n98-magerun2
     pkgs.envsubst
-    pkgs.php81Packages.php-cs-fixer
+    pkgs.php82Packages.php-cs-fixer
   ];
 
   scripts.composer.exec = ''php ${composerPhar} $@'';
@@ -20,7 +24,7 @@ in {
   env = {
     PROJECT_HOST = "burpee.local:8081";
     APP_ROOT = "/home/nazar/Projects/burpee";
-    DOLLAR="$";
+    DOLLAR = "$";
     DEVENV_HTTP_PORT = "8081";
     DEVENV_MAIL_UI_PORT = "3031";
     DEVENV_MAIL_SMTP_PORT = "3032";
@@ -36,8 +40,12 @@ in {
 
   languages.php = {
     enable = true;
-    package = pkgs.php81.buildEnv {
-      extensions = { all, enabled }: with all; enabled ++ [ redis xdebug xsl ];
+    package = pkgs.php82.buildEnv {
+      extensions = {
+        all,
+        enabled,
+      }:
+        with all; enabled ++ [redis xdebug xsl];
       extraConfig = ''
         memory_limit = -1
         error_reporting=E_ALL
@@ -47,13 +55,13 @@ in {
         display_startup_errors = On
       '';
     };
-    fpm.phpOptions =''
-       memory_limit = -1
-       error_reporting=E_ALL
-       xdebug.mode = debug
-       endmail_path = ${pkgs.mailpit}/bin/mailpit sendmail -S 127.0.0.1:${config.env.DEVENV_MAIL_SMTP_PORT}
-       display_errors = On
-       display_startup_errors = On
+    fpm.phpOptions = ''
+      memory_limit = -1
+      error_reporting=E_ALL
+      xdebug.mode = debug
+      endmail_path = ${pkgs.mailpit}/bin/mailpit sendmail -S 127.0.0.1:${config.env.DEVENV_MAIL_SMTP_PORT}
+      display_errors = On
+      display_startup_errors = On
     '';
     fpm.pools.web = {
       listen = "${config.env.DEVENV_PHPFPM_SOCKET}";
@@ -98,10 +106,9 @@ in {
 
   services.mailpit = {
     enable = true;
-    uiListenAddress   = "127.0.0.1:${config.env.DEVENV_MAIL_UI_PORT}";
+    uiListenAddress = "127.0.0.1:${config.env.DEVENV_MAIL_UI_PORT}";
     smtpListenAddress = "127.0.0.1:${config.env.DEVENV_MAIL_SMTP_PORT}";
   };
-
 
   services.mysql = {
     enable = true;
@@ -116,14 +123,13 @@ in {
         query_cache_limit = "2M";
       };
     };
-    initialDatabases = [{ name = "${config.env.DEVENV_DB_NAME}"; }];
+    initialDatabases = [{name = "${config.env.DEVENV_DB_NAME}";}];
     ensureUsers = [
       {
         name = "${config.env.DEVENV_DB_USER}";
         password = "${config.env.DEVENV_DB_PASS}";
-        ensurePermissions = { "${config.env.DEVENV_DB_NAME}.*" = "ALL PRIVILEGES"; };
+        ensurePermissions = {"${config.env.DEVENV_DB_NAME}.*" = "ALL PRIVILEGES";};
       }
     ];
   };
 }
-  

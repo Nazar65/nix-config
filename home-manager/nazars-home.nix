@@ -135,7 +135,6 @@ in {
     ];
   };
   home.sessionVariables = {
-    GPG_TTY = "$(tty)";
     GDK_BACKEND = "wayland"; # GTK
     XDG_SESSION_TYPE = "wayland"; # Electron
     QT_QPA_PLATFORM = "wayland"; # QT
@@ -535,13 +534,13 @@ in {
   programs.gpg = {
     enable = true;
     settings = {
-      pinentry-mode = "loopback";
+      use-agent = true;
     };
   };
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
+    pinentryPackage = pkgs.pinentry-gtk2;
     extraConfig = ''
       allow-loopback-pinentry
     '';

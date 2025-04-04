@@ -4,7 +4,12 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
+	keys = {
 
+		{ "<C-s>b", "<cmd>Telescope buffers<cr>", desc = "Search in buffers" },
+		{ "<C-s>d", "<cmd>Telescope find_files<cr>", desc = "Search files" },
+		{ "<C-s>f", "<cmd>Telescope live_grep<cr>", desc = "Search in files" },
+	},
 	config = function()
 		local telescope = require("telescope")
 

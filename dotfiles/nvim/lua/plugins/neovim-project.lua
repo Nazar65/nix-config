@@ -20,6 +20,9 @@ return {
 		"ibhagwan/fzf-lua",
 		"Shatur/neovim-session-manager",
 	},
+	keys = {
+		{ "<C-p>l", "<cmd>NeovimProjectDiscover<cr>", desc = "Project List" },
+	},
 	lazy = false,
 	priority = 100,
 }
