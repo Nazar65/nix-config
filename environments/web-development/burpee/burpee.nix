@@ -101,9 +101,13 @@ in {
 
   services.rabbitmq = {
     enable = true;
+    plugins = [
+      "rabbitmq_management"
+      "rabbitmq_mqtt"
+      "rabbitmq_web_stomp"
+    ];
     managementPlugin.enable = true;
   };
-
   services.mailpit = {
     enable = true;
     uiListenAddress = "127.0.0.1:${config.env.DEVENV_MAIL_UI_PORT}";

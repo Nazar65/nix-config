@@ -87,8 +87,10 @@
   programs.dconf.enable = true;
   security.pam.services.swaylock = {};
   security.polkit.enable = true;
+
   services.greetd = {
     enable = true;
+    vt = 2;
     settings = {
       default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";

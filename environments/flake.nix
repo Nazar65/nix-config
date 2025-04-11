@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
     devenv.url = "github:cachix/devenv";
   };
@@ -10,33 +10,36 @@
     extra-substituters = "https://devenv.cachix.org";
   };
 
-  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
-    let
-      forEachSystem = nixpkgs.lib.genAttrs (import systems);
-    in
-      {
-        packages = forEachSystem (system: {
-          devenv-up = self.devShells.${system}.burpee.config.procfileScript;
-        });
+  outputs = {
+    self,
+    nixpkgs,
+    devenv,
+    systems,
+    ...
+  } @ inputs: let
+    forEachSystem = nixpkgs.lib.genAttrs (import systems);
+  in {
+    packages = forEachSystem (system: {
+      devenv-up = self.devShells.${system}.burpee.config.procfileScript;
+    });
 
-        devShells = forEachSystem
-          (system:
-            let
-              pkgs = nixpkgs.legacyPackages.${system};
-            in
-              {
-                burpee = devenv.lib.mkShell {
-                  inherit inputs pkgs;
-                  modules = [
-                    ./web-development/burpee/burpee.nix
-                  ];
-                };
-                reinders = devenv.lib.mkShell {
-                  inherit inputs pkgs;
-                  modules = [
-                    ./web-development/reinders/reinders.nix
-                  ];
-                };
-              });
-      };
+    devShells =
+      forEachSystem
+      (system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        burpee = devenv.lib.mkShell {
+          inherit inputs pkgs;
+          modules = [
+            ./web-development/burpee/burpee.nix
+          ];
+        };
+        reinders = devenv.lib.mkShell {
+          inherit inputs pkgs;
+          modules = [
+            ./web-development/reinders/reinders.nix
+          ];
+        };
+      });
+  };
 }
