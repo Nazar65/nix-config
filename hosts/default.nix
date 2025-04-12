@@ -59,14 +59,17 @@
 
   xdg.portal.config = {
     enable = true;
+    wlr.enable = true;
+    xdgOpenUsePortal = true;
+    preferred = {
+      default = ["gtk"];
+      "org.freedesktop.impl.portal.Inhibit" = "none";
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+      "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    };
     extraPortals = [
-      # To make slack screen-sharing possible
-      pkgs.xdg-desktop-portal-wlr
-      # gtk portal needed to make gtk apps happy
       pkgs.xdg-desktop-portal-gtk
     ];
-    #xdgOpenUsePortal = true;
-    wlr.enable = true;
   };
 
   programs.ssh = {

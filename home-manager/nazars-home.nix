@@ -145,6 +145,7 @@ in {
     XDG_SESSION_DESKTOP = "sway";
     XDG_CURRENT_DESKTOP = "sway";
     MOZ_ENABLE_WAYLAND = 1;
+    GTK_USE_PORTAL = 1;
   };
 
   services.mako = {
@@ -382,6 +383,18 @@ in {
         titlebar = false;
         commands = [
           {
+            command = "inhibit_idle fullscreen";
+            criteria = {
+              class = "^firefox$";
+            };
+          }
+          {
+            command = "inhibit_idle fullscreen";
+            criteria = {
+              app_id = "^firefox$";
+            };
+          }
+          {
             command = "opacity 0.95, border pixel 3";
             criteria = {
               class = ".*";
@@ -464,18 +477,10 @@ in {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
     };
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
+
   programs.thunderbird = {
     enable = true;
     profiles.personal = {
