@@ -144,6 +144,7 @@ in {
     QT_QPA_PLATFORM = "wayland"; # QT
     XDG_SESSION_DESKTOP = "sway";
     XDG_CURRENT_DESKTOP = "sway";
+    MOZ_ENABLE_WAYLAND = 1;
   };
 
   services.mako = {
@@ -363,6 +364,7 @@ in {
     extraSessionCommands = ''
       export XDG_SESSION_TYPE=wayland
       export XDG_CURRENT_DESKTOP=sway
+      export MOZ_ENABLE_WAYLAND=1
     '';
     checkConfig = false;
     config = let
@@ -414,7 +416,6 @@ in {
       };
       keybindings = {
         "${modifier}+Shift+r" = "reload";
-        "${modifier}+t" = "exec ${pkgs.foot}/bin/foot";
         "${modifier}+a" = "exec ${pkgs.fuzzel}/bin/fuzzel";
         "${modifier}+Shift+q" = "kill";
         "${modifier}+v" = "splitv";
@@ -490,6 +491,12 @@ in {
         "offline.download.download_messages" = 1;
       };
     };
+  };
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr];
   };
   xdg.enable = true;
   accounts.email.accounts = {

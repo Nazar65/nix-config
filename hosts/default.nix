@@ -72,11 +72,6 @@
   programs.ssh = {
     startAgent = true;
   };
-  fileSystems."/mnt/media" = {
-    device = "//192.168.88.20/thegoat";
-    fsType = "cifs";
-    options = ["username=spyware" "password=3r5465XNlika31" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s"];
-  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -85,9 +80,10 @@
   };
 
   programs.dconf.enable = true;
+  services.dbus.enable = true;
   security.pam.services.swaylock = {};
   security.polkit.enable = true;
-
+  security.rtkit.enable = true;
   services.greetd = {
     enable = true;
     vt = 2;
